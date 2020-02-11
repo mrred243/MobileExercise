@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>React getting started</title>
+  </head>
+  <body>
+    <!-- Root container for react components -->
+    <div id='root'></div>
+
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+
+    <script type="text/babel">
+      // Your scripts goes here
+      const HelloComponent = () => {
+
+        const [name, setName] = React.useState({firstName: '', lastName: ''});
+
+        const inputChange = (e) => {
+          setName({...name, [event.target.name]: event.target.value});
+        }
+        const addName = (e) => {
+          e.preventDefault();
+          alert("Hello " + name.firstName +" "+ name.lastName);
+        }
+
+        return (<div>
+          <form onSubmit={addName}>
+              <input type="text" value={name.firstName} name="firstName" onChange={inputChange} />
+              <input type="text" value={name.lastName} name="lastName" onChange={inputChange} />
+              <input type="submit" value="Add" />
+
+          </form>
+        </div>)
+      }
+      ReactDOM.render(<HelloComponent  />,
+     document.getElementById('root'));
+    </script>
+  </body>
+</html>

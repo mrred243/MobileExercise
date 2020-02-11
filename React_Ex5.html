@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>React getting started</title>
+  </head>
+  <body>
+    <!-- Root container for react components -->
+    <div id='root'></div>
+
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+
+    <script type="text/babel">
+      // Your scripts goes here
+      const HelloComponent = () => {
+
+        const [input, setInput] = React.useState({name: '', age: ''});
+        const [output, setOutput] = React.useState('');
+
+        const inputChange = (e) => {
+          setInput({...input, [event.target.name]: event.target.value});
+        }
+        const addInput = (e) => {
+          e.preventDefault();
+          if (input.age >17) {
+            setOutput('Hello ' + input.name);
+            setInput({name:'', age:''});
+          }
+          else{
+            setOutput('You are too young.');
+            setInput({name:'', age:''});
+
+          }
+        }
+
+        return (<div>
+          <div>
+          {output}
+          </div>
+          <form onSubmit={addInput}>
+              <input type="text" value={input.name} name="name" onChange={inputChange} />
+              <input type="number" value={input.age} name="age" onChange={inputChange} />
+              <input type="submit" value="Submit" />
+
+          </form>
+        </div>)
+      }
+      ReactDOM.render(<HelloComponent  />,
+     document.getElementById('root'));
+    </script>
+  </body>
+</html>
